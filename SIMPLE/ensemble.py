@@ -371,9 +371,9 @@ class Ensemble_of_ensemble(torch.nn.Module):
                 
                 # Check if epoch is equal to -1
                 if epoch == -1:
-                    work_num_dic = {'DomainNet': 0, 'VLCS': 4, 'PACS': 4, 'OfficeHome': 2, 'TerraIncognita': 0}
+                    work_num_dic = {'DomainNet': 0, 'VLCS': 4, 'PACS': 4, 'OfficeHome': 2, 'TerraIncognita': 0, 'SceneDatasets': 4}
                 else:
-                    work_num_dic = {'DomainNet': 2, 'VLCS': 4, 'PACS': 4, 'OfficeHome': 2, 'TerraIncognita': 4}
+                    work_num_dic = {'DomainNet': 2, 'VLCS': 4, 'PACS': 4, 'OfficeHome': 2, 'TerraIncognita': 4, 'SceneDatasets': 4}
                 
                 # Load the data using the domainbed_dataloader function and assign it to the train_loader, val_loader, test_loader, full_loader, and class_name variables
                 self.train_loader, self.val_loader, self.test_loader, self.full_loader, self.class_name = domainbed_dataloader(dataset = args.domainbed_dataset, data_dir = data_dir,\
@@ -404,9 +404,9 @@ class Ensemble_of_ensemble(torch.nn.Module):
                 
                 # Check if epoch is equal to -1
                 if epoch == -1:
-                    work_num_dic = {'DomainNet': 0, 'VLCS': 4, 'PACS': 4, 'OfficeHome': 2, 'TerraIncognita': 0}
+                    work_num_dic = {'DomainNet': 0, 'VLCS': 4, 'PACS': 4, 'OfficeHome': 2, 'TerraIncognita': 0, 'SceneDatasets': 4}
                 else:
-                    work_num_dic = {'DomainNet': 4, 'VLCS': 4, 'PACS': 4, 'OfficeHome': 2, 'TerraIncognita': 4}
+                    work_num_dic = {'DomainNet': 4, 'VLCS': 4, 'PACS': 4, 'OfficeHome': 2, 'TerraIncognita': 4, 'SceneDatasets': 4}
                 
                 # Load the data using the domainbed_dataloader function and assign it to the train_loader_1, val_loader, test_loader, full_loader, and class_name variables
                 train_loader_1, self.val_loader, self.test_loader, self.full_loader, self.class_name = domainbed_dataloader(dataset = args.domainbed_dataset, data_dir = data_dir,\
