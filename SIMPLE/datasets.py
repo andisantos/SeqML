@@ -390,6 +390,7 @@ class SceneDatasets(MultipleDomainDataset):
                 env_transform = augment_transform
             else:
                 env_transform = transform
+            
             split_npy = Path(root, self.BASEFOLDERS[i],
                              f'{env_name}.npy')
             dataset = SceneDatasets_Environment(

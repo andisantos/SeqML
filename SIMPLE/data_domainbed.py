@@ -62,6 +62,7 @@ def domainbed_dataloader(dataset, data_dir, test_envs, batch_size, domain_random
     # Get default hyperparameters for the given dataset
     hparams = hparams_registry.default_hparams('IGA', dataset)
     # Create the dataset object
+    # print(data_dir)
     dataset = vars(datasets)[dataset](data_dir,
         test_envs, hparams)
 
@@ -82,7 +83,7 @@ def domainbed_dataloader(dataset, data_dir, test_envs, batch_size, domain_random
         # If domain_random is True, create random training and validation samplers
         # that sample from 80% of the training data, and a separate dataloader
         # for the test set
-        
+        print('domain random')
         sum_train_sample = np.sum([len(env) for i, env in enumerate(source_domain)])
         
         # Create samplers for the training and validation sets (useful for splits with more than one training domain)
@@ -124,7 +125,7 @@ def domainbed_dataloader(dataset, data_dir, test_envs, batch_size, domain_random
     else:
         # If domain_random is False, create infinite dataloaders for each training domain,
         # with separate training and validation samplers
-        
+        print('--- NOT domain_random') 
         train_samplers = [RandomSampler(range(0,int(len(env)*0.8))) for i, env in enumerate(source_domain)]
         val_samplers = [RandomSampler(range(int(len(env)*0.8), len(env))) for i, env in enumerate(source_domain)]
 

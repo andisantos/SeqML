@@ -365,6 +365,7 @@ class Ensemble_of_ensemble(torch.nn.Module):
             
             # Set the data directory to './miscellaneous/domainbed/data/'
             data_dir = './miscellaneous/domainbed/data/'
+            # data_dir = '/hadatasets/andreza/SceneDatasets'
             
             # Check if args.super_mixed is False
             if args.super_mixed == False:
