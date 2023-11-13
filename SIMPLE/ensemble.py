@@ -26,9 +26,13 @@ from data_domainbed import domainbed_dataloader
 # dataset_inference_information contains information about the datasets and their corresponding models,
 # including whether to preload the models or not, the number of domains, and the number of classes
 dataset_inference_information = {
-    'domainbed': {'PACS': {'preload': True, 'domain_num': 4, 'class_type': 7}, 'VLCS': {'preload': True, 'domain_num': 4, 'class_type': 5},
-        'OfficeHome': {'preload': True, 'domain_num': 4, 'class_type': 65},
-        'TerraIncognita': {'preload': True, 'domain_num': 4, 'class_type': 10}, 'DomainNet': {'preload': True, 'domain_num': 6, 'class_type': 345}},
+    'domainbed': {'PACS': {'preload': True, 'domain_num': 4, 'class_type': 7},
+                  'VLCS': {'preload': True, 'domain_num': 4, 'class_type': 5},
+                  'OfficeHome': {'preload': True, 'domain_num': 4, 'class_type': 65},
+                  'TerraIncognita': {'preload': True, 'domain_num': 4, 'class_type': 10},
+                  'DomainNet': {'preload': True, 'domain_num': 6, 'class_type': 345},
+                  'SceneDatasets': {'preload': True, 'domain_num': 2, 'class_type': 8},
+    },
     'flops_test': {'preload': False}
 }
 
