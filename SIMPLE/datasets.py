@@ -288,15 +288,56 @@ class RotatedMNIST(MultipleEnvironmentMNIST):
         return TensorDataset(x, y)
 
 
+# class MultipleEnvironmentImageFolder(MultipleDomainDataset):
+#     def __init__(self, root, test_envs, augment, hparams):
+#         super().__init__()
+#         environments = [f.name for f in os.scandir(root) if f.is_dir()]
+#         environments = sorted(environments)
+# 
+#         transform = get_transform()
+#         augment_scheme = hparams.get('data_augmentation_scheme', 'default')
+#         augment_transform = get_augment_transform(augment_scheme)
+# 
+#         self.datasets = []
+#         for i, environment in enumerate(environments):
+# 
+#             if augment and (i not in test_envs):
+#                 env_transform = augment_transform
+#             else:
+#                 env_transform = transform
+# 
+#             path = os.path.join(root, environment)
+#             env_dataset = ImageFolder(path,
+#                 transform=env_transform)
+# 
+#             self.datasets.append(env_dataset)
+# 
+#         self.input_shape = (3, 224, 224,)
+#         self.num_classes = len(self.datasets[-1].classes)
+
 class MultipleEnvironmentImageFolder(MultipleDomainDataset):
     def __init__(self, root, test_envs, augment, hparams):
         super().__init__()
         environments = [f.name for f in os.scandir(root) if f.is_dir()]
         environments = sorted(environments)
 
-        transform = get_transform()
-        augment_scheme = hparams.get('data_augmentation_scheme', 'default')
-        augment_transform = get_augment_transform(augment_scheme)
+        transform = transforms.Compose([
+            transforms.Resize((224,224)),
+            transforms.ToTensor(),
+            transforms.Normalize(
+                mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+        ])
+
+        augment_transform = transforms.Compose([
+            # transforms.Resize((224,224)),
+            transforms.RandomResizedCrop(224, scale=(0.7, 1.0)),
+            transforms.RandomHorizontalFlip(),
+            transforms.ColorJitter(0.3, 0.3, 0.3, 0.3),
+            transforms.RandomGrayscale(),
+            transforms.ToTensor(),
+            transforms.Normalize(
+                mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        ])
 
         self.datasets = []
         for i, environment in enumerate(environments):
@@ -307,7 +348,9 @@ class MultipleEnvironmentImageFolder(MultipleDomainDataset):
                 env_transform = transform
 
             path = os.path.join(root, environment)
-            env_dataset = ImageFolder(path,
+
+            ImageFolder_with_idx = dataset_with_indices(ImageFolder, i)
+            env_dataset = ImageFolder_with_idx(path,
                 transform=env_transform)
 
             self.datasets.append(env_dataset)
@@ -390,16 +433,54 @@ class SceneDatasets(MultipleDomainDataset):
                 env_transform = augment_transform
             else:
                 env_transform = transform
-            
-            split_npy = Path(root, self.BASEFOLDERS[i],
-                             f'{env_name}.npy')
-            dataset = SceneDatasets_Environment(
+            # colocar flag pra desabilitar isso e rodar ood-bench
+            split_npy = Path(root, self.BASEFOLDERS[i], f'{env_name}.npy')
+            Dataset_env_with_idx = dataset_with_indices(SceneDatasets_Environment, i)
+            dataset = Dataset_env_with_idx(
                 split_npy,
                 env_transform)
+            
             self.datasets.append(dataset)
 
         self.input_shape = (3, 224, 224,)
         self.num_classes = 8
+        self.classes = {
+             'bathroom': 0,
+             'bedroom': 1,
+             'childs_room': 2,
+             'classroom': 3,
+             'dressing_room': 4,
+             'living_room': 5,
+             'studio': 6,
+             'swimming_pool': 7
+         }
+
+
+# def dataset_with_indices(cls, env_i = None):
+
+#     def __getitem__(self, index):
+#         data, target = cls.__getitem__(self, index)
+#         if env_i == None:
+#             return data, target, index
+#         else:
+#             return data, target, index, env_i
+
+#     return type(cls.__name__, (cls,), {
+#         '__getitem__': __getitem__,
+#     }) 
+
+def dataset_with_indices(cls, env_i = None):
+
+    def __getitem__(self, index):
+        data, target = cls.__getitem__(self, index)
+        if env_i == None:
+            return data, target, index
+        else:
+            return data, target, index, env_i
+
+    return type(cls.__name__, (cls,), {
+        '__getitem__': __getitem__,
+    }) 
 
 
 class SceneDatasetsFolder(MultipleEnvironmentImageFolder):
