@@ -125,7 +125,7 @@ def domainbed_dataloader(dataset, data_dir, test_envs, batch_size, domain_random
     else:
         # If domain_random is False, create infinite dataloaders for each training domain,
         # with separate training and validation samplers
-        print('--- NOT domain_random') 
+        print('--- data_domainbed.py NOT DOMAIN_RANDOM')
         train_samplers = [RandomSampler(range(0,int(len(env)*0.8))) for i, env in enumerate(source_domain)]
         val_samplers = [RandomSampler(range(int(len(env)*0.8), len(env))) for i, env in enumerate(source_domain)]
 

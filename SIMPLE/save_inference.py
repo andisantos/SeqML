@@ -31,10 +31,16 @@ def inference_saver(args, ensemble_net, model_pool):
 
         # Check if the model directory already exists
         if model_name[:5] != '(MAE)':
-            model_dir = '/domainbed_inference_saved_' + args.domainbed_dataset + '/' + model_name + '/'
+            #model_dir = '/domainbed_inference_saved_' + args.domainbed_dataset + '/' + model_name + '/'
+            model_dir = f'/{args.domainbed_dataset}/{model_name}/'
         else:
-            model_dir = '/domainbed_inference_saved_' + args.domainbed_dataset + '/' + model_name.split(':')[0] + '/'
-        ifexist_model_dir = '/home/private_user_1/v-liziyue/ziyue' + model_dir
+            #model_dir = '/domainbed_inference_saved_' + args.domainbed_dataset + '/' + model_name.split(':')[0] + '/'
+            model_name = model_name.split(':')[0]
+            model_dir = f'/{args.domainbed_dataset}/{model_name}/' 
+        # ifexist_model_dir = '/home/private_user_1/v-liziyue/ziyue' + model_dir
+        
+        # saving models inference outputs
+        ifexist_model_dir = '/src/SeqML/SIMPLE/data' + model_dir
 
         # Create a dictionary to store the number of files for the current model
         file_num_dic[model_name] = {}

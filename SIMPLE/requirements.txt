@@ -11,3 +11,5 @@ nni
 psutil
 gdown
 wilds
+notebook
+
