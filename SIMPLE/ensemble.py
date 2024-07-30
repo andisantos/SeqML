@@ -31,7 +31,7 @@ dataset_inference_information = {
                   'OfficeHome': {'preload': True, 'domain_num': 4, 'class_type': 65},
                   'TerraIncognita': {'preload': True, 'domain_num': 4, 'class_type': 10},
                   'DomainNet': {'preload': True, 'domain_num': 6, 'class_type': 345},
-                  'SceneDatasets': {'preload': True, 'domain_num': 2, 'class_type': 8},
+                  'SceneDatasets': {'preload': True, 'domain_num': 2, 'class_type': 2},
     },
     'flops_test': {'preload': False}
 }
