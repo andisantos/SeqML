@@ -70,7 +70,7 @@ def inference_saver(args, ensemble_net, model_pool):
                 os.makedirs(dataloader_dir)
 
             with torch.no_grad():
-                with tqdm(total=len(data_loader), desc='Train') as t:
+                with tqdm(total=len(data_loader), desc='Save_Inference') as t:
                     for batch_index, (images, labels, idxs, envs) in enumerate(data_loader):
 
                         # Create dictionaries to store test results
@@ -94,7 +94,8 @@ def inference_saver(args, ensemble_net, model_pool):
                             if len(out.shape) == 4:
                                 out = torch.nn.AdaptiveAvgPool2d((1,1))(out).squeeze(-1).squeeze(-1)
 
-                        # If the current model is not a clip or swag model, directly feed the images to the model
+                        # If the current model is not a clip or swag model, 
+                        # directly feed the images to the model
                         else:
                             out = active_model(images)
 
