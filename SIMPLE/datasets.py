@@ -380,14 +380,14 @@ class SceneDatasets_Environment(Dataset):
         self.transform = transform
         self.samples = []
         self.classes = {
-            'bathroom': 0,
-            'bedroom': 1,
-            'childs_room': 2,
-            'classroom': 3,
-            'dressing_room': 4,
-            'living_room': 5,
-            'studio': 6,
-            'swimming_pool': 7
+            # 'bathroom': 0,
+            'bedroom': 0,
+            'childs_room': 1,
+            # 'classroom': 3,
+            # 'dressing_room': 4,
+            # 'living_room': 5,
+            # 'studio': 6,
+            # 'swimming_pool': 7
         }
         reader = np.load(split_npy)
         for [img_path, label] in reader:
@@ -469,9 +469,10 @@ def dataset_with_indices(cls, env_i = None):
         else:
             return data, target, index, env_i
 
-    return type(cls.__name__, (cls,), {
-        '__getitem__': __getitem__,
-    }) 
+    return type(cls.__name__,
+                (cls,),
+                {'__getitem__': __getitem__,}
+                ) 
 
 
 class SceneDatasetsFolder(MultipleEnvironmentImageFolder):
