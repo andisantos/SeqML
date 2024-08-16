@@ -391,8 +391,8 @@ class SceneDatasets_Environment(Dataset):
         }
         reader = np.load(split_npy)
         for [img_path, label] in reader:
-#             self.samples.append((img_path, self.classes[label]))
-            self.samples.append((img_path, int(label)))
+            self.samples.append((img_path, int(self.classes[label])))
+            # self.samples.append((img_path, int(label)))
 
     def __len__(self):
         return len(self.samples)
@@ -409,7 +409,7 @@ class SceneDatasets_Environment(Dataset):
 class SceneDatasets(MultipleDomainDataset):
     CHECKPOINT_FREQ = 300
     BASEFOLDERS = ["places8_train", "places8_test"] #index 0 : treino | index 1: test
-    ENVIRONMENTS = ["plces8_train_ood_bench_0.7", "places8_test_0.7"]
+    ENVIRONMENTS = ["train_baseline_2classes", "test_baseline_2classes"]
 
     def __init__(self, root, test_envs, hparams):
         super().__init__()
@@ -426,14 +426,14 @@ class SceneDatasets(MultipleDomainDataset):
                 env_transform = transform
             # colocar flag pra desabilitar isso e rodar ood-bench
             split_npy = Path(root, self.BASEFOLDERS[i], f'{env_name}.npy')
-            Dataset_env_with_idx = dataset_with_indices(SceneDatasets_Environment, i)
-            dataset = Dataset_env_with_idx(
+            dataset_env_with_idx = dataset_with_indices(SceneDatasets_Environment, i)
+            dataset = dataset_env_with_idx(
                 split_npy,
                 env_transform)
             
             self.datasets.append(dataset)
 
-        self.input_shape = (3, 224, 224,)
+        self.input_shape = (3, 224, 224)
         self.num_classes = 2
         self.classes = {
             #  'bathroom': 0,

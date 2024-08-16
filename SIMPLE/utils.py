@@ -138,7 +138,9 @@ def walkFile(file):
 
 # Function for Checking the File Number
 def check_file_number(dir_to_check, domainbed_dataset):
-    dic = {'PACS':41, 'VLCS': 44, 'OfficeHome': 64, 'TerraIncognita': 97, 'DomainNet': 2295}
+    dic = {'PACS':41, 'VLCS': 44, 'OfficeHome': 64,
+           'TerraIncognita': 97, 'DomainNet': 2295,
+           'SceneDatasets': 856}
     # Define a variable for the file count
     num = walkFile(dir_to_check)
     # Compare the number of files with the expected value

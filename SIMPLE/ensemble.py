@@ -377,9 +377,13 @@ class Ensemble_of_ensemble(torch.nn.Module):
                     work_num_dic = {'DomainNet': 2, 'VLCS': 4, 'PACS': 4, 'OfficeHome': 2, 'TerraIncognita': 4, 'SceneDatasets': 4}
                 
                 # Load the data using the domainbed_dataloader function and assign it to the train_loader, val_loader, test_loader, full_loader, and class_name variables
-                self.train_loader, self.val_loader, self.test_loader, self.full_loader, self.class_name = domainbed_dataloader(dataset = args.domainbed_dataset, data_dir = data_dir,
-                     test_envs = [args.domainbed_test_env], batch_size = args.batch_size, 
-                     domain_random = args.mixed_training, work_num = work_num_dic[args.domainbed_dataset])
+                self.train_loader, self.val_loader, self.test_loader, self.full_loader, self.class_name = domainbed_dataloader(
+                    dataset = args.domainbed_dataset,
+                    data_dir = data_dir,
+                    test_envs = [args.domainbed_test_env],
+                    batch_size = args.batch_size, 
+                    domain_random = args.mixed_training,
+                    work_num = work_num_dic[args.domainbed_dataset])
 
                 # Check if type(self.train_loader) is equal to list
                 if type(self.train_loader) == list:
@@ -410,7 +414,8 @@ class Ensemble_of_ensemble(torch.nn.Module):
                     work_num_dic = {'DomainNet': 4, 'VLCS': 4, 'PACS': 4, 'OfficeHome': 2, 'TerraIncognita': 4, 'SceneDatasets': 4}
                 
                 # Load the data using the domainbed_dataloader function and assign it to the train_loader_1, val_loader, test_loader, full_loader, and class_name variables
-                train_loader_1, self.val_loader, self.test_loader, self.full_loader, self.class_name = domainbed_dataloader(dataset = args.domainbed_dataset, data_dir = data_dir,\
+                train_loader_1, self.val_loader, self.test_loader, self.full_loader, self.class_name = domainbed_dataloader(
+                    dataset = args.domainbed_dataset, data_dir = data_dir,
                     test_envs = [args.domainbed_test_env], batch_size = args.batch_size,
                     domain_random = False, work_num = work_num_dic[args.domainbed_dataset])
                 

@@ -140,7 +140,7 @@ if args.dataset == 'domainbed':
     data_dir = '/src/SeqML/SIMPLE/data/' + args.domainbed_dataset + '/'
 
 # initialize model pool and ensemble network
-model_pool = Model_pool(model_name = pretrained_models, model_num = args.model_num, model_idx = args.model_idx, dataset = args.dataset,sub_dataset = args.domainbed_dataset, data_dir = data_dir, args = args)
+model_pool = Model_pool(model_name = pretrained_models, model_num = args.model_num, model_idx = args.model_idx, dataset = args.dataset, sub_dataset = args.domainbed_dataset, data_dir = data_dir, args = args)
 ensemble_net = Ensemble_of_ensemble(args)
 
 # if manually set number of epochs, then change default one

@@ -71,6 +71,7 @@ def domainbed_dataloader(dataset, data_dir, test_envs, batch_size, domain_random
     
     # Get the class names from the dataset
     classes = dataset[0].classes
+    print(f"---------- {classes}")
     
     for env_i, env in enumerate(dataset):
         # Sort the environments into source and target domains

@@ -11,7 +11,7 @@ from utils import AverageMeter, ProgressMeter, accuracy
 
 
 def train_ensemble(epoch, \
-        ensemble_net, data_loader,\
+        ensemble_net, data_loader, \
         split = 'train', model_pool = None, args = None):
     
     # Convert network to DataParellel and move it to device
