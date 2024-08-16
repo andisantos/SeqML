@@ -392,7 +392,7 @@ class SceneDatasets_Environment(Dataset):
         reader = np.load(split_npy)
         for [img_path, label] in reader:
             self.samples.append((img_path, int(self.classes[label])))
-            # self.samples.append((img_path, int(label)))
+#            self.samples.append((img_path, int(label)))
 
     def __len__(self):
         return len(self.samples)

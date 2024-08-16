@@ -144,4 +144,5 @@ def check_file_number(dir_to_check, domainbed_dataset):
     # Define a variable for the file count
     num = walkFile(dir_to_check)
     # Compare the number of files with the expected value
+    print(num)
     return (num == dic[domainbed_dataset])
